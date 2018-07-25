@@ -10,7 +10,6 @@
 	<artifactId>SparkStreaming_Web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>SparkStreaming_Web</name>
 	<url>http://maven.apache.org</url>
 	<!--添加cloudera的repository -->
