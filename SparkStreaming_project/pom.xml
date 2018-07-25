@@ -27,7 +27,6 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
-
     <!-- Kafka 依赖-->
     <!--
     <dependency>
