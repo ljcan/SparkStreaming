@@ -2,6 +2,17 @@
 
 * 前言：使用scala和java混编完成，其中也涉及到python脚本来自动生成日志，linux crontab调度工具来定时执行脚本生成实时日志。生成的数据主要是模拟某学习网站学习视频课程的访问量（其中模拟的日志中URL以"/class"开头的表示实战课程，然后通过流水线Flume+Kafka+SparkStreaming进行实时日志的收集，HBase来存储数据）*
 
+### 注意事项（使用的软件工具及环境配置）
+1. hadoop-2.6.0-cdh5.7.0
+2. hbase-1.2.0-cdh5.7.0
+3. zookeeper-3.4.5-cdh5.7.0
+4. spark-2.2.0-bin-2.6.0-cdh5.7.0
+5. apache-flume-1.6.0-cdh5.7.0-bin
+6. kafka_2.11-0.9.0.0
+7. apache-maven-3.3.9 
+8. jdk1.8.0_181
+9. scala-2.11.8
+
 ## 需求分析
 
 1. 统计该网站实战课程的访问量。
