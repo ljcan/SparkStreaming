@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" monitorInterval="1800">
+
+    <properties>
+        <property name="LOG_HOME">/disk/logs/sem</property>
+
+        <!--<property name="trace_name">trace</property>-->
+        <!--<property name="debug_name">debug</property>-->
+        <property name="info_name">info</property>
+        <!--<property name="warn_name">warn</property>-->
+        <property name="error_name">error</property>
+        <!--<property name="fatal_name">fatal</property>-->
+
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n " />
+        </Console>
+
+        <!--<RollingRandomAccessFile name="trace_file" fileName="${LOG_HOME}/${trace_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${trace_name}-%d{yyyy-MM-dd}-%i.log.gz">-->
+            <!--<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <!--<SizeBasedTriggeringPolicy size="20 MB" />-->
+            <!--</Policies>-->
+            <!--<DefaultRolloverStrategy max="20" />-->
+        <!--</RollingRandomAccessFile>-->
+
+        <!--<RollingRandomAccessFile name="debug_file" fileName="${LOG_HOME}/${debug_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${debug_name}-%d{yyyy-MM-dd}-%i.log.gz">-->
+            <!--<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <!--<SizeBasedTriggeringPolicy size="20 MB" />-->
+            <!--</Policies>-->
+            <!--<DefaultRolloverStrategy max="20" />-->
+        <!--</RollingRandomAccessFile>-->
+
+        <RollingRandomAccessFile name="infoFile" fileName="${LOG_HOME}/${info_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${info_name}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!--<RollingRandomAccessFile name="warn_file" fileName="${LOG_HOME}/${warn_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${warn_name}-%d{yyyy-MM-dd}-%i.log.gz">-->
+            <!--<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <!--<SizeBasedTriggeringPolicy size="20 MB" />-->
+            <!--</Policies>-->
+            <!--<DefaultRolloverStrategy max="20" />-->
+        <!--</RollingRandomAccessFile>-->
+
+        <RollingRandomAccessFile name="errorFile" fileName="${LOG_HOME}/${error_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${error_name}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+
+        <!--<RollingRandomAccessFile name="fatal_file" fileName="${LOG_HOME}/${fatal_name}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${fatal_name}-%d{yyyy-MM-dd}-%i.log.gz">-->
+            <!--<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%t] %class{36}.%M:%L \n- %msg%xEx%n" />-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <!--<SizeBasedTriggeringPolicy size="20 MB" />-->
+            <!--</Policies>-->
+            <!--<DefaultRolloverStrategy max="20" />-->
+        <!--</RollingRandomAccessFile>-->
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="org.hibernate.hql.internal.ast.HqlSqlWalker" level="ERROR" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="infoFile" />
+        </Logger>
+
+        <!--<Logger name="com.sdyc" level="trace" additivity="true">-->
+          <!-- -->
+        <!--</Logger>-->
+
+        <!--对全局不限定包的日志输出-->
+        <Root level="info">
+            <AppenderRef ref="infoFile" />
+            <AppenderRef ref="errorFile" />
+            <AppenderRef ref="Console" />
+        </Root>
+
+    </Loggers>
+</Configuration>
